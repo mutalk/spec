@@ -38,12 +38,24 @@ It's simple byte array up to 255 bytes.
 |--------------|-----------|
 | 1 bytes      | up to 255 |
 
+Listening topics must be explicitly set by receiver. If receiver get topic, that not in subscription list, it must drop it silently.
+
+## Auto channel
+
+Calculates by hash of topic. It is not strictly unique hash function and used only for reducing collision. Mutalk using CRC-16-ANSI
+
+| Width | Poly | Init | RefIn | RefOut | XorOut | Check |
+|-------|------|------|-------|--------|--------|-------|
+| 16    |0x1021|0xC6C6| true  | true   | 0x0    | 0xBF05|
+
+_(c) - Wikipedia_
+
 ## Message
 
 Anything else after topic is payload
 
 
-# Packet
+## Packet
 
 | Magic  | Topic   size | Topic     | Data
 |--------|--------------|-----------|---------|
