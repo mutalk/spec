@@ -6,6 +6,8 @@
 * Unreliable
 * Messaging
 
+Default port: 56778
+
 ## Size
 
 Maximum size of all packet (without IP headers) - **508** bytes
