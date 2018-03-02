@@ -14,14 +14,13 @@ Maximum size of all packet (without IP headers) - **508** bytes
 
 Channel is a 'physical' identification of shared bus for communication.
 
-Channel can be converted to multicast address by following rule: `multicast_ip = channel_idx + 4009754625`.
+Channel can be converted to multicast address by following rule: `multicast_ip = channel_idx % 16777215 + 4009754625`.
 Where 
 
 * 4009754625 is start multicast ip address (`239.0.0.1`)
-* `channel_idx` - unsigned 16-bit integer, that identify shared channel
+* `channel_idx` - unsigned 32-bit integer, that identify shared channel
 * `multicast_ip` - result multicast ip
 
-As result maximum number of channels is 2^16 = 65536
 
 ## Magic
 
@@ -42,13 +41,8 @@ Listening topics must be explicitly set by receiver. If receiver get topic, that
 
 ## Auto channel
 
-Calculates by hash of topic. It is not strictly unique hash function and used only for reducing collision. Mutalk using CRC-16-ANSI
+Calculates by hash of topic. It is not strictly unique hash function and used only for reducing collision. Mutalk using CRC-32-IEEE 802.3
 
-| Width | Poly | Init | RefIn | RefOut | XorOut | Check |
-|-------|------|------|-------|--------|--------|-------|
-| 16    |0x1021|0xC6C6| true  | true   | 0x0    | 0xBF05|
-
-_(c) - Wikipedia_
 
 ## Message
 
