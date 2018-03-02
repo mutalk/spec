@@ -18,7 +18,7 @@ Channel can be converted to multicast address by following rule: `multicast_ip =
 Where 
 
 * 4009754625 is start multicast ip address (`239.0.0.1`)
-* `channel_idx` - unsigned 64-bit integer, that identify shared channel
+* `channel_idx` - unsigned 32-bit integer, that identify shared channel
 * `multicast_ip` - result multicast ip
 
 Channel number must be in network order after [magic](#magic) bytes. If message arrives without channel number, it must be dropped
@@ -35,6 +35,9 @@ Anything else after topic is payload
 
 ## Packet
 
-| Magic  | Topic    | Data
+| Magic  | Chanel   | Data
 |--------|--------- |-----------|
 | 4 byte | 4 bytes  | 0 - 500   |
+
+
+
